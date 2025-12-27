@@ -3,7 +3,7 @@ import logo from './assets/pips-palace-logo.png';
 
 function App() {
   const openWhatsApp = () => {
-    window.open('https://wa.me/26700000000', '_blank');
+    window.open('https://wa.me/26771508580', '_blank');
   };
 
   // Optional: For animation of background logo
