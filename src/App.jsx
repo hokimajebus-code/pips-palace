@@ -1,9 +1,24 @@
-import logo from './assets/pips-palace-logo.png'
+import { useEffect, useState } from 'react';
+import logo from './assets/pips-palace-logo.png';
 
 function App() {
   const openWhatsApp = () => {
-    window.open('https://wa.me/26771508580', '_blank')
-  }
+    window.open('https://wa.me/26700000000', '_blank');
+  };
+
+  // Optional: For animation of background logo
+  const [bgPos, setBgPos] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgPos((prev) => (prev + 0.05) % 100);
+    }, 16); // ~60fps
+    return () => clearInterval(interval);
+  }, []);
+
+  // Candlestick animation styles
+  const candleAnimation = (delay = '0s') => ({
+    animation: `bounce 1.5s ease-in-out ${delay} infinite alternate`,
+  });
 
   return (
     <div
@@ -15,52 +30,41 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         gap: '20px',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <img src={logo} className="logo" alt="Pips Palace Logo" />
-
-      <h1 className="text-gold">Pips Palace</h1>
-      <p>Premium Trading Signals</p>
-
-      {/* Candlestick (CSS) */}
-      <div
+      {/* Stationary top-right logo */}
+      <img
+        src={logo}
+        alt="Pips Palace Logo"
         style={{
-          width: '10px',
-          height: '60px',
-          background: '#00ff88',
-          position: 'relative',
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          width: '80px',
+          zIndex: 2,
         }}
-      >
-        <span
-          style={{
-            position: 'absolute',
-            top: '-20px',
-            left: '4px',
-            width: '2px',
-            height: '100px',
-            background: '#00ff88',
-          }}
-        />
-      </div>
+      />
 
-      {/* WhatsApp Button */}
-      <button
-        onClick={openWhatsApp}
+      {/* Faint moving background logo */}
+      <img
+        src={logo}
+        alt="Background Logo"
         style={{
-          marginTop: '20px',
-          padding: '12px 24px',
-          background: '#25D366',
-          border: 'none',
-          borderRadius: '30px',
-          color: '#000',
-          fontSize: '16px',
-          cursor: 'pointer',
+          position: 'absolute',
+          width: '400px',
+          opacity: 0.05,
+          top: `${bgPos}%`,
+          left: `${bgPos}%`,
+          transform: 'translate(-50%, -50%)',
+          zIndex: 0,
+          pointerEvents: 'none',
         }}
-      >
-        Chat on WhatsApp
-      </button>
-    </div>
-  )
-}
+      />
 
-export default App
+      <h1 style={{ color: '#FFD700', zIndex: 1 }}>Pips Palace</h1>
+      <p style={{ color: '#fff', zIndex: 1 }}>Premium Trading Signals</p>
+
+      {/* Candlesticks */}
+      <div style={{ display: 'flex', gap: '15px', zIndex: 1 }}
