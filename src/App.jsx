@@ -1,5 +1,5 @@
 import logo from './assets/pips-palace-logo.png';
-import './App.css'; // <- new CSS file for animations
+import './App.css'; // Make sure this file exists
 
 function App() {
   const openWhatsApp = () => {
@@ -11,7 +11,7 @@ function App() {
       {/* Stationary top-right logo */}
       <img src={logo} alt="Pips Palace Logo" className="top-logo" />
 
-      {/* Faint background logo */}
+      {/* Faint moving background logo */}
       <img src={logo} alt="Background Logo" className="bg-logo" />
 
       <h1 className="title">Pips Palace</h1>
